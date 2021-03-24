@@ -2,7 +2,6 @@
     <!-- Should display user interactive graphs/charts displaying UK covid data-->
 <head>
     <?php header("Content-Type: text/html; charset=UTF-8");?>
-    <?php header("Accepts: application/json; application/xml; text/csv; application/vnd.PHE-COVID19.v1+json; application/vnd.PHE-COVID19.v1+xml");?>
 
     <!--chartJS library link-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"> </script>
@@ -12,60 +11,44 @@
         Dashboard
     </h1>
 
-    <!-- chart html elements-->
-    <canvas id="dailyNewCasesEng"></canvas>
+    <!-- chart html elements - need new one for each chart-->
+    <canvas id="EngNewCasesLineChart"></canvas>
 
 </head>
 <body>
     <script>
-        /*Decided not to use the FETCH API or javascript Promises for http request
-        *to allow internet explorer 11 support - for improved accessibility
-        */
-        function populateDailyNewCasesEngChart(resource){
-            const request = new XMLHttpRequest();
-            //listens for XMLHttpRequest ready state changes
-            request.addEventListener('readystatechange', function() {
-                //readystate 4 = XMLHttpRequest complete
-                if(request.readyState === 4 && request.status === 200){
-                    //parses the retrieved JSON file into an array of json objects
-                    const objData = JSON.parse(request.responseText);
-                    //logs the resulting js object data structure in web browser console
-                    console.log(objData);
+        //fetches JSON data from API url, parses it into an array of javascript objects and returns it.
+        //asynchronous function - so runs in background 
+        async function getData(api_url){
+            //fetch returns a promise object with one of 3 states - fullfiled(success - response object returned) - pending(initial state) = rejected(failed - returns error)
+            //store response object returned by fetch once the promise has resolved
+            const response = await fetch(api_url);
+            //parses the json in the response object and returns an array of json objects upon completion
+            const json = await response.json();
+            const data = json.data;
+            //logs the returned javascript object array in browser console so you can view it.
+            console.log(data);
+            return data;
+        }   
 
-                    //access the array of objects that are contained within the 'data' array
-                    covidData = objData.data;
-                    //create empty associative array
-                    const values ={};
-                    //places the value of date attribute for every obj in covidData array into new array
-                    values.date = covidData.map(function(obj){return obj.date;}).reverse();
-                    //places the value of newCasesByPublishDate attribute for every obj in covidData array into new array
-                    values.newCases = covidData.map(function(obj){return obj.newCasesByPublishDate;}).reverse();
-                    //array reverse used to make dates start from earliest in dataset
+        //creates chart - NEED TO MAKE A NEW FUNCTION FOR EACH NEW CHART
+        function makeEngNewCasesLineChart(data){
+            const chart = document.getElementById('EngNewCasesLineChart');
 
-                    makeChart(values);
-                    //response code not 200 so not successful
-                } else if(request.readyState === 4){
-                    console.log("Unable to retrieve data");
-                }
-            });
-
-            //opens an asynchronous http request(runs in background while script continues on)
-            request.open('GET', resource, true);
-            request.send();
-        };
-
-        function makeChart(values){
-            const chart = document.getElementById('dailyNewCasesEng');
-            //arrays containing axes values
-            date = values.date;
-            newCases = values.newCases;
+            //RETRIEVING VALUES TO POPULATE THE GRAPH WITH FROM THE ARRAY OF JAVASCRIPT OBJECTS PASSED IN
             
+            //places the value of date attribute for every obj in data array into new array
+            const date = data.map(obj => obj.date).reverse();
+            //places the value of newCasesByPublishDate attribute for every obj in data array into new array
+            const newCases = data.map(obj => obj.newCasesByPublishDate).reverse();
+            //array reverse used to make dates start from earliest in dataset
+
             let LineChart = new Chart(chart, {
                 type: 'line',
                 data: {
-                    labels: date,
+                    labels: date, //x axis data
                     datasets: [{
-                        label: 'New Coronavirus Cases In England',
+                        label: 'New Coronavirus Cases In England', //graph title
                         fill: false,
                         lineTension: 0,
                         backgroundColor: "rgba(75,192,192,0.4)",
@@ -74,7 +57,7 @@
                         borderDash: [],
                         borderDashOffset: 0.0,
                         borderJointStyle: 'miter',
-                        data: newCases
+                        data: newCases //y axis data
                     }]
                 },
                 options: {
@@ -86,13 +69,13 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Number of New Cases'
+                                labelString: 'Number of New Cases' //y axis label
                             }
                         }],
                         xAxes: [{ 
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Date'
+                                labelString: 'Date' //x axis label
                             }
                         }]
                     }
@@ -100,9 +83,10 @@
             })
         }
 
-    
-        //calling methods to populate and display charts
-        populateDailyNewCasesEngChart('https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCasesByPublishDate":"newCasesByPublishDate"}');
+    //CALLING FUNCTIONS TO GET DATA MAKE GRAPHS
+
+    //waits for the javascript object array to be retrieved from the api url and passes it into the function for making a chart.
+    getData('https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCasesByPublishDate":"newCasesByPublishDate"}').then(data => makeEngNewCasesLineChart(data));
     </script>
 </body>
 </html>
