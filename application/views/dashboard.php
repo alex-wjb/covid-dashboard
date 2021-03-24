@@ -12,7 +12,8 @@
     </h1>
 
     <!-- chart html elements - need new one for each chart-->
-    <canvas id="EngNewCasesLineChart"></canvas>
+    <canvas id="engNewCasesLineChart"></canvas>
+    <canvas id="engVirusTestsLineChart"></canvas>
 
 </head>
 <body>
@@ -33,7 +34,7 @@
 
         //creates chart - NEED TO MAKE A NEW FUNCTION FOR EACH NEW CHART
         function makeEngNewCasesLineChart(data){
-            const chart = document.getElementById('EngNewCasesLineChart');
+            const chart = document.getElementById('engNewCasesLineChart');
 
             //RETRIEVING VALUES TO POPULATE THE GRAPH WITH FROM THE ARRAY OF JAVASCRIPT OBJECTS PASSED IN
             
@@ -83,10 +84,63 @@
             })
         }
 
+        function makeEngDailyVirusTestsChart(data){
+            const chart = document.getElementById('engVirusTestsLineChart');
+
+            //RETRIEVING VALUES TO POPULATE THE GRAPH WITH FROM THE ARRAY OF JAVASCRIPT OBJECTS PASSED IN
+            
+            //places the value of date attribute for every obj in data array into new array
+            const date = data.map(obj => obj.date).reverse();
+            //places the value of newCasesByPublishDate attribute for every obj in data array into new array
+            const newVirusTests = data.map(obj => obj.newVirusTests).reverse();
+            //array reverse used to make dates start from earliest in dataset
+
+            let LineChart = new Chart(chart, {
+                type: 'line',
+                data: {
+                    labels: date, //x axis data
+                    datasets: [{
+                        label: 'New virus tests In England', //graph title
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(75,192,192,0.4)",
+                        borderColor: "rgba(75,192,192,1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJointStyle: 'miter',
+                        data: newVirusTests //y axis data
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 10000
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Number of New tests' //y axis label
+                            }
+                        }],
+                        xAxes: [{ 
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date' //x axis label
+                            }
+                        }]
+                    }
+                }
+            })
+        }
+
     //CALLING FUNCTIONS TO GET DATA MAKE GRAPHS
 
     //waits for the javascript object array to be retrieved from the api url and passes it into the function for making a chart.
     getData('https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCasesByPublishDate":"newCasesByPublishDate"}').then(data => makeEngNewCasesLineChart(data));
+    
+    getData('https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newVirusTests":"newVirusTests"}').then(data => makeEngDailyVirusTestsChart(data));;
     </script>
 </body>
 </html>
