@@ -16,7 +16,7 @@ echo "<h4> Today's date is  {$Date}";
 <h3> Protect Yourself</h3> 
 <h4 id="Testlocation"> <a href="Testlocation.php">Test Center</a> </id>
 <h4 id="NHSInformation"> <a href="NHSInformation.php">NHS Information</a> </id>
-<h4 id="Protect"> <a href="website.php">Daily Update </a> </id>
+<h4 id="Protect"> <a href="index.php">Daily Update </a> </id>
 <h4 id="Death"> <a href="Death.php">Deaths Data</a> </id>
 <h4 id="COVIDInformation"> <a href="COVIDInformation.php">COVID-19 Information</a> </id>
 </div>
