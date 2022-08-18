@@ -29,8 +29,21 @@ h2{
 body{
   min-height: 400px;
 }
+.nav{
+ /* margin: 0 auto; */
+  width: fit-content;
+  padding-inline-start: 0px;
+}
+.navItem{
+  background-color:  lightblue;
+  padding: 6px;
+	display:inline-block;
+  text-align: center;
+  font-size: 20px;
+  border: solid black 3px;
+  margin: 4px;
 
-
+}
 
 #Testlocation{
 	background-color:  lightblue;

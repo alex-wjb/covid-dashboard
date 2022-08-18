@@ -4,22 +4,10 @@
   <link href="websitecss.css" rel="stylesheet">
 </header>
 <html>
-<h2> NHS Information </h2>
-<?PHP
+<h2> NHS Information </h2> <?php
+include 'templates/nav.php';
 
-$Date = date ("Y-m-d");
-echo "<h4> Today's date is  {$Date} </h4>";
-
-?>
-<div>
-  <h3> NHS Information</h3>
-  <h4 id="Testlocation"> <a href="index.php">DailyUpdates</a> </h4>
-  <h4 id="NHSInformation"> <a href="Testlocation.php">Test Center</a> </h4>
-  <h4 id="Protect"> <a href="Shopformask.php">Protect Yourself </a> </h4>
-  <h4 id="Death"> <a href="Death.php">Deaths Data</a> </h4>
-  <h4 id="COVIDInformation"> <a href="COVIDInformation.php">COVID-19 Information</a> </h4>
-</div>
-<h4>UK COVID-19 Vaccine</h4>
+?> <h4>UK COVID-19 Vaccine</h4>
 <div class="ukvaccine">
   <h4> Coronavirus (COVID-19) vaccine</h4>
   <p>The coronavirus (COVID-19) vaccine is safe and effective. It gives you the best protection against coronavirus.</p>

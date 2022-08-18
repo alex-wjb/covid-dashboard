@@ -9,21 +9,10 @@
 </head>
 <html>
 <div id="siteContainer">
-  <h2> Total Death </h2>
-  <?PHP
+  <h2> Total Death </h2> <?php
+include 'templates/nav.php';
 
-$Date = date("Y-m-d");
-echo "<h4> Today's date is  {$Date}</h4>";
-
-?>
-  <div>
-    <h3>Deaths Data</h3>
-    <h4 id="Testlocation"> <a href="Testlocation.php">Test Center</a> </h4>
-    <h4 id="NHSInformation"> <a href="NHSInformation.php">NHS Information</a> </h4>
-    <h4 id="Protect"> <a href="Shopformask.php">Protect Yourself </a> </h4>
-    <h4 id="Death"> <a href="index.php">Daily Update</a> </h4>
-    <h4 id="COVIDInformation"> <a href="COVIDInformation.php">COVID-19 Information</a> </h4>
-  </div>
+?> 
 
   <body>
     <div class="twoGraphsContainer">

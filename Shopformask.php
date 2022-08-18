@@ -4,23 +4,10 @@
   <link href="websitecss.css" rel="stylesheet">
 </header>
 <html>
-<h2> How to protect yourself ?</h2>
-<?PHP
+<h2> How to protect yourself ?</h2> <?php
+include 'templates/nav.php';
 
-$Date = date ("Y-m-d");
-echo "<h4> Today's date is  {$Date}";
-
-?>
-<div>
-  <h3> Protect Yourself</h3>
-  <h4 id="Testlocation"> <a href="Testlocation.php">Test Center</a> </h4>
-  <h4 id="NHSInformation"> <a href="NHSInformation.php">NHS Information</a>
-  </h4>
-  <h4 id="Protect"> <a href="index.php">Daily Update </a> </h4>
-  <h4 id="Death"> <a href="Death.php">Deaths Data</a> </h4>
-  <h4 id="COVIDInformation"> <a href="COVIDInformation.php">COVID-19 Information</a> </h4>
-</div>
-<p>COVID-19 Transmission</p>
+?> <p>COVID-19 Transmission</p>
 <div class="Transmission">
   <p> “The source of the outbreak has yet to be determined. A zoonotic source to the outbreak has not been identified
     yet, but investigations are ongoing. <br><br> SARS-CoV-2 is primarily transmitted between people through respiratory

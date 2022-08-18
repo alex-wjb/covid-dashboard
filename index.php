@@ -1,25 +1,14 @@
 <!DOCTYPE html>
+<title> COVID-19 Daily Summary</title>
 <header>
-  <title> COVID-19 Daily Summary</title>
   <link href="websitecss.css" rel="stylesheet">
   <!--chartJS library link-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"> </script>
 </header>
-<h2> COVID-19 Dashboard </h2>
-<?PHP
-$Date = date("Y-m-d");
-echo "<h4> Today's date is  {$Date}</h4>";
-?>
-<div>
-  <h3> Daily Updates</h3>
-  <h4 id="Testlocation"> <a href="Testlocation.php">Test Center</a>
-  </h4>
-  <h4 id="NHSInformation"> <a href="NHSInformation.php">NHS Information</a> </h4>
-  <h4 id="Protect"> <a href="Shopformask.php">Protect Yourself </a> </h4>
-  <h4 id="Death"> <a href="Death.php">Deaths Data</a> </h4>
-  <h4 id="COVIDInformation"> <a href="COVIDInformation.php">COVID-19 Information</a> </h4>
-</div>
-<h3 id="summaryTitle">Daily Summary</h3>
+<h2> COVID-19 Dashboard </h2> <?php
+include 'templates/nav.php';
+
+?> <h3 id="summaryTitle">Daily Summary</h3>
 <div id="disclaimer">
   <h4>About the Data</h4>
   <p>The data displayed on this dashboard is dynamically fetched from the UK Government Covid-19 API which is updated
