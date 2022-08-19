@@ -9,10 +9,10 @@
 </head>
 <html>
 <div id="siteContainer">
-  <h2> Total Death </h2> <?php
+  <h2> Covid-19 Deaths </h2> <?php
 include 'templates/nav.php';
 
-?> 
+?>
 
   <body>
     <div class="twoGraphsContainer">

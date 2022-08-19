@@ -4,7 +4,7 @@
   <link href="websitecss.css" rel="stylesheet">
 </header>
 <html>
-<h2> How to protect yourself ?</h2> <?php
+<h2> How to Protect Yourself</h2> <?php
 include 'templates/nav.php';
 
 ?> <p>COVID-19 Transmission</p>

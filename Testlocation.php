@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <header>
-  <title> Test Center Avaiablive</title>
+  <title> Covid Test Centre </title>
   <link href="websitecss.css" rel="stylesheet">
 </header>
 <html>
