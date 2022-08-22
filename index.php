@@ -58,7 +58,7 @@ include 'templates/nav.php';
             <button type="button" class="resetButton" id="resetUKTests">Reset To UK</button>
           </div>
         </form>
-        <div class="latestDate" id="newVirusTests">Last Updated: </div>
+        <div class="latestDate" id="newVirusTestsByPublishDate">Last Updated: </div>
       </div>
       <div class="deathGraph">
         <canvas class="graph" id="virusTestsChart"></canvas>
@@ -226,8 +226,8 @@ include 'templates/nav.php';
     "resetUKCases");
   //Virus tests chart
   populateAreaNameList("areaTypeTestsList", "areaNameTestsList");
-  filterListener("areaTypeTestsList", "areaNameTestsList", "areaTypeTests", "newVirusTests", makeVirusTestsChart,
-    "resetUKTests");
+  filterListener("areaTypeTestsList", "areaNameTestsList", "areaTypeTests", "newVirusTestsByPublishDate",
+    makeVirusTestsChart, "resetUKTests");
   //Hopsital ADMISSIONS chart
   populateAreaNameList("areaTypeAdmisList", "areaNameAdmisList");
   filterListener("areaTypeAdmisList", "areaNameAdmisList", "areaTypeAdmis", "newAdmissions", makeCovidAdmissionsChart,
@@ -284,19 +284,19 @@ include 'templates/nav.php';
     var e = document.getElementById(areaTypeListId);
     var value = e.options[e.selectedIndex].value;
     var areaType = value;
-    if (graphMetric == "newVirusTests" && areaType == "Nation") {
-      let latestDiv = document.getElementById(graphMetric);
-      latestDiv.innerHTML = "Last Updated: ";
-      if (window.virusTestsChart instanceof Chart) {
-        window.virusTestsChart.destroy();
-      }
-      var canvas = document.getElementById("virusTestsChart");
-      var ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "15px Arial";
-      ctx.fillText("Data only available for the UK", 0, 20);
-      return;
-    }
+    // if (graphMetric == "newVirusTestsBySpecimenDate" && areaType == "Nation") {
+    //   let latestDiv = document.getElementById(graphMetric);
+    //   latestDiv.innerHTML = "Last Updated: ";
+    //   if (window.virusTestsChart instanceof Chart) {
+    //     window.virusTestsChart.destroy();
+    //   }
+    //   var canvas = document.getElementById("virusTestsChart");
+    //   var ctx = canvas.getContext("2d");
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   ctx.font = "15px Arial";
+    //   ctx.fillText("Data only available for the UK", 0, 20);
+    //   return;
+    // }
     var e = document.getElementById(areaNameListID);
     var value = e.options[e.selectedIndex].value;
     var areaName = value;
@@ -487,7 +487,7 @@ include 'templates/nav.php';
     //places the value of date attribute for every obj in data array into new array
     const date = data.map(obj => obj.date).reverse();
     //places the value of newCasesByPublishDate attribute for every obj in data array into new array
-    const newVirusTests = data.map(obj => obj.newVirusTests).reverse();
+    const newVirusTests = data.map(obj => obj.newVirusTestsByPublishDate).reverse();
     const sevDayAvg = movingAvg(newVirusTests, 3, 3);
     //array reverse used to make dates start from earliest in dataset
     window.virusTestsChart = new Chart(chart, {
@@ -507,7 +507,7 @@ include 'templates/nav.php';
         responsive: true,
         maintainAspectRatio: false,
         title: {
-          text: 'Daily Covid-19 Virus Tests'
+          text: 'Daily Covid-19 Virus Tests By Publish Date'
         },
         scales: {
           yAxes: [{

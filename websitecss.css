@@ -340,15 +340,18 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #666; displa
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .navItem{
     display: block;
   }
   .nav{
     margin: auto;
-    width: 400px;
+    width: 300px;
   }
+
+  
 }
+
 
 
 
