@@ -4,11 +4,10 @@
   <link href="websitecss.css" rel="stylesheet">
   <!--chartJS library link-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"> </script>
+  <script src="createNav.js" type="text/javascript" defer></script>
 </header>
-<h2> COVID-19 Dashboard </h2> <?php
-include 'templates/nav.php';
-
-?> <h3 id="summaryTitle">Daily Summary</h3>
+<h2 id="pageTitle"> COVID-19 Dashboard </h2>
+<h3 id="summaryTitle">Daily Summary</h3>
 <div id="disclaimer">
   <h4>About the Data</h4>
   <p>The data displayed on this dashboard is dynamically fetched from the UK Government Covid-19 API which is updated

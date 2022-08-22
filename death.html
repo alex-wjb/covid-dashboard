@@ -5,15 +5,12 @@
   <link href="websitecss.css" rel="stylesheet">
   <!--chartJS library link-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"> </script>
+  <script src="createNav.js" type="text/javascript" defer></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=no">
 </head>
 <html>
 <div id="siteContainer">
-  <h2> Covid-19 Deaths </h2> <?php
-include 'templates/nav.php';
-
-?>
-
+  <h2 id="pageTitle"> Covid-19 Deaths </h2> 
   <body>
     <div class="twoGraphsContainer">
       <div class="deathGraphAndFilterContainer">
